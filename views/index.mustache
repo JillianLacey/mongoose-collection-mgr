@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vinyl Collection</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <form action="/addNew" method="POST">
+        <label for="">Name</label><input type="text" name="name" placeholder="Artist name" required><br>
+        <label for="">Album Name</label><input type="text" name="albumName" placeholder="Album name" required><br>
+
+
+        <label for="">Condition</label>
+        <select type="select" name="condition" required>
+            <option value="new" selected>New</option>
+            <option value="good">Good</option>
+            <option value="fair">Fair</option>
+            <option value="poor">Poor</option>
+         </select>
+        <br>
+        <h2>Is it signed?</h2>
+        <label for="true">Yes</label>
+        <input type="radio" name="signed" value="true" checked required>
+        <label for="false">No</label>
+        <input type="radio" name="signed" value="false">
+        <br>
+
+        <label for="">Number of Tracks</label><input type="number" name="albumDetails.tracks" placeholder=""><br>
+        <label for="">Release Year</label><input type="date" name="albumDetails.releaseYear" placeholder=""><br>
+
+
+        <label for="">RPM</label>
+        <select type="select" name="albumDetails.rpm" required>
+            <option value="new" selected>33</option>
+            <option value="good">45</option>
+            <option value="fair">78</option>
+         </select>
+        
+
+    
+    
+    </form>
+</body>
+</html>
