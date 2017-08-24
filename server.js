@@ -18,43 +18,30 @@ app.use(express.static(path.join(__dirname, "./public")));
 app.use(logger("dev"));
 
 
-///VIEW ENGINE
+//\\\\\\\\\\\\\\\\\ VIEW ENGINE ////////////////////\\
 app.engine("mustache", mustacheExpress());
 app.set("views", "./views");
 app.set("view engine", "mustache");
 
 
-
-// let tpath = {
-//     name: "Tom Petty and the Heartbreakers",
-//     albumName: "Damn the Torpedos",
-//     condition: "good",
-//     signed: false,
-//     albumDetails: {
-//         tracks: 9,
-//         releaseYear: 1979,
-//         rpm: 78,
-//     },
-//     genre: ["rock", "classic rock"],
-//     value: 20,
-//     forSale: false,
-//   };
-
-//   let newVinylCollection = new VinylCollection(tpath);
+//\\\\\\\\\\\\\\\\\\\\\ GET ////////////////////////\\
   
-//   newVinylCollection
-//     .save()
-//     .then(function(savedVinyl) {
-//       console.log("savedVinyl: ", savedVinyl);
-//     })
-//     .catch(function(err) {
-//       console.log(err);
-//     });
+app.get("/", function(req, res) {
+  VinylCollection.find()
+    .then(function(foundAlbum) {
+      if (!foundAlbum) {
+        return res.send({ msg: "No albums found" });
+      }
+      // res.send(foundAlbum);
+      return res.render("index", {vinyl: foundAlbum});
+    })
+    .catch(function(err) {
+      res.status(500).send(err);
+    });
+});
 
 
-// we need to do a res.render in a get request for the mustache page for the home page
-
-
+//\\\\\\\\\\\\\\\\\\\\\ POST ////////////////////////\\
 app.post("/vinylcollection", function(req, res) {
     // console.log(req.body);
     let newVinylCollection = new VinylCollection(req.body);
@@ -62,63 +49,65 @@ app.post("/vinylcollection", function(req, res) {
     newVinylCollection
       .save()
       .then(function(savedAlbum) {
-        res.send(savedAlbum);
+        // res.send(savedAlbum);
+        res.redirect("/");
       })
       .catch(function(err) {
         res.status(500).send(err);
       });
   });
-  
-  app.get("/vinylcollection", function(req, res) {
-    VinylCollection.find()
+
+
+//\\\\\\\\\\\\\\\\ INDIVIDUAL ENTRY /////////////////////\\
+
+  app.get("/vinylcollection/:id", function(req, res) {
+    VinylCollection.findById(req.params.id)
       .then(function(foundAlbum) {
         if (!foundAlbum) {
           return res.send({ msg: "No albums found" });
         }
-  
-        res.send(foundAlbum);
+        res.render("vinylDetails", {vinyl: foundAlbum});
       })
       .catch(function(err) {
         res.status(500).send(err);
       });
+      
   });
-  
-  app.get("/vinylcollection/:id", function(req, res) {
-    VinylCollection.findById(req.params.id)
-      .then(function(foundAlbum) {
-        if (!foundBook) {
-          return res.send({ msg: "No albums found" });
-        }
-        res.send(foundAlbum);
-      })
-      .catch(function(err) {
-        res.status(500).send(err);
-      });
-  });
-  
-  app.put("/vinylcollection/:id", function(req, res) {
+
+
+///////////////// TO UPDATE ENTRY //////////////////////////
+  app.post("/vinylcollection/:id", function(req, res) {
     VinylCollection.findByIdAndUpdate(req.params.id, req.body)
       .then(function(updatedAlbum) {
         if (!updatedAlbum) {
           return res.send({ msg: "Could not update collection" });
         }
-        res.send(updatedAlbum);
+        // res.send(updatedAlbum);
+        let redirectURL = 
+          res.redirect(`/vinylcollection/${req.params.id}`);
       })
       .catch(function(err) {
         res.status(500).send(err);
       });
   });
-  
+
+  ///////////////// TO DELETE AN ENTRY ////////////////////////
   app.delete("/vinylcollection/:id", function(req, res) {
     VinylCollection.findByIdAndRemove(req.params.id)
       .then(function(message) {
-        res.send(message);
+        // res.send(message);
+        return res.render("index", {vinyl: foundAlbum});
       })
       .catch(function(err) {
         res.status(500).send(err);
       });
   });
+
+
+
+
+
+
   
-
-
+////////////APP.LISTEN/////////
 app.listen(8000, () => console.log("Server running on port 8000!"));

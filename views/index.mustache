@@ -4,14 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Vinyl Collection</title>
+    <title>Vinyl Collection DB</title>
     <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-    <form action="/addNew" method="POST">
-        <label for="">Name</label><input type="text" name="name" placeholder="Artist name" required><br>
-        <label for="">Album Name</label><input type="text" name="albumName" placeholder="Album name" required><br>
-
+    <form action="/vinylcollection" method="POST">
+        <label for="">Name</label>
+        <input type="text" name="name" placeholder="Artist name" required><br>
+        <label for="">Album Name</label>
+        <input type="text" name="albumName" placeholder="Album name" required><br>
 
         <label for="">Condition</label>
         <select type="select" name="condition" required>
@@ -23,25 +24,59 @@
         <br>
         <h2>Is it signed?</h2>
         <label for="true">Yes</label>
-        <input type="radio" name="signed" value="true" checked required>
+        <input type="radio" name="signed" value="true" checked>
         <label for="false">No</label>
         <input type="radio" name="signed" value="false">
         <br>
 
-        <label for="">Number of Tracks</label><input type="number" name="albumDetails.tracks" placeholder=""><br>
-        <label for="">Release Year</label><input type="date" name="albumDetails.releaseYear" placeholder=""><br>
-
+        <label for="">Number of Tracks</label>
+        <input type="number" name="albumDetails.tracks" placeholder=""><br>
+        <label for="">Release Year</label>
+        <input type="number" name="albumDetails.releaseYear" placeholder=""><br>
 
         <label for="">RPM</label>
         <select type="select" name="albumDetails.rpm" required>
-            <option value="new" selected>33</option>
-            <option value="good">45</option>
-            <option value="fair">78</option>
+            <option value=33 >33</option>
+            <option value=45 >45</option>
+            <option value=78 >78</option>
          </select>
-        
+        <br><br>
+        <label for="">Genre</label><br>
+        <input type="text" name="genre" placeholder=""><br>
+        <input type="text" name="genre" placeholder=""><br>
+        <input type="text" name="genre" placeholder=""><br>
 
-    
-    
+        <h2>Is it for sale?</h2>
+        <label for="true">Yes</label>
+        <input type="radio" name="forSale" value="true" required checked>
+        <label for="false">No</label>
+        <input type="radio" name="forSale" value="false">
+        <br>
+        <button type="Submit">Submit</button>
     </form>
+
+<hr>
+
+
+ {{#vinyl}}
+
+    <div>
+        <a href="/vinylcollection/{{_id}}"><h1>{{name}}</h1></a>
+        <p>Artist Name: {{name}}</p>
+        <p>Album Name: {{albumName}}</p>
+        <p>Condition: {{condition}}</p>
+        <p>Is it signed? {{signed}}</p>
+        <p>Value: {{value}}</p>
+        <p>Is it for sale? {{forSale}}</p>
+        <p>Genre: {{genre}}</p>
+        <p>How many tracks? {{albumDetails.tracks}}</p>
+        <p>Release Year: {{albumDetails.releaseYear}}</p>
+        <p>RPM: {{albumDetails.rpm}}</p>
+    </div>
+    <br>
+    {{/vinyl}}  
+
+
+
 </body>
 </html>

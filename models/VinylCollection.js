@@ -18,7 +18,6 @@ const VinylCollectionSchema = new Schema({
     },
     signed: {
       type: Boolean,
-      required: true
     },
     albumDetails:{
         tracks: Number,
@@ -30,7 +29,6 @@ const VinylCollectionSchema = new Schema({
     }, 
     genre: {
       type: Array,
-      required: true
     },
     value: Number,
     forSale: {
