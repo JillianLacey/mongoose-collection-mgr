@@ -4,9 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Record Details</title>
+    <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
+    <div class="wrapper">
+    <div class="entry-styles details">
     {{#vinyl}}
     <div>
         <p>Artist Name: {{name}}</p>
@@ -21,7 +24,7 @@
         <p>RPM: {{albumDetails.rpm}}</p>
     </div>
     <br>
-
+    </div>
 
  <form action="/vinylcollection/{{_id}}" method="POST">
         <label for="">Name</label>
@@ -40,33 +43,28 @@
 
         <h2>Is it signed?</h2>
         {{#signed}}
-        <label for="true">Yes</label>
+        <label for="yes">Yes</label>
         <input type="radio" name="signed" checked >
-        <label for="false">No</label>
+        <label for="no">No</label>
         <input type="radio" name="signed">
         {{/signed}}
         {{^signed}}
-        <label for="true">Yes</label>
+        <label for="yes">Yes</label>
         <input type="radio" name="signed"  checked>
-        <label for="false">No</label>
+        <label for="no">No</label>
         <input type="radio" name="signed">
        {{/signed}}
-
 
         <label for="">Number of Tracks</label>
         <input type="number" name="albumDetails.tracks" value={{albumDetails.tracks}} placeholder=""><br>
         <label for="">Release Year</label>
         <input type="number" name="albumDetails.releaseYear" value={{albumDetails.releaseYear}} placeholder=""><br>
-
-
         <label for="">RPM</label>
         <select type="select" name="albumDetails.rpm" value={{albumDetails.rpm}} required>
             <option value=33 >33</option>
             <option value=45 >45</option>
             <option value=78 >78</option>
          </select>
-      
-
         <label for="">Genre</label><br>{{#genre}}
         <input type="text" name="genre" value={{.}}>{{/genre}}<br>
     
@@ -89,12 +87,13 @@
     </form>
     {{/vinyl}} 
 
-
+<div class="bottom-nav">
      <form action="/" method="DELETE">
         <button type="Submit">Delete</button>
      </form>
-
-   
+     <a href="/">Return To Listings</a>
+</div>
+</div>
    
 </body>
 </html>

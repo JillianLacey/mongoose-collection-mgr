@@ -1,0 +1,51 @@
+body {
+    margin: 0 auto;
+    width: 100vw;
+    height: 100vh;
+    font-family: 'Raleway', sans-serif;
+    /* background-image: url("https://www.toptal.com/designers/subtlepatterns/patterns/swirl_pattern.png"); */
+    background: linear-gradient( rgba(5, 39, 51, 0.45), rgba(5, 39, 51, 0.45)), url("https://www.toptal.com/designers/subtlepatterns/patterns/swirl_pattern.png");
+    background-attachment: fixed;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.new-entry {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 40px;
+}
+
+.entry-styles {
+    background-image: url("https://www.toptal.com/designers/subtlepatterns/patterns/double_lined.png");
+    border: 1px solid slategray;
+    width: 50%;
+    padding: 15px 0 53px 60px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    /* box-shadow: 1 1 4px rgba(25, 25, 25, 1); */
+}
+
+.details {
+    margin-top: 60px;
+}
+
+a {
+    color: #0D8194;
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+a:hover {
+    color: rgb(117, 24, 83);
+}
+
+.bottom-nav {
+    margin-bottom: 30px;
+}
