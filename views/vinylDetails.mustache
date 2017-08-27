@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,93 +8,92 @@
     <title>Record Details</title>
     <link rel="stylesheet" href="/styles.css">
 </head>
+
 <body>
-    <div class="wrapper">
-    <div class="entry-styles details">
     {{#vinyl}}
-    <div>
-        <p>Artist Name: {{name}}</p>
-        <p>Album Name: {{albumName}}</p>
-        <p>Condition: {{condition}}</p>
-        <p>Is it signed? {{signed}}</p>
-        <p>Value: {{value}}</p>
-        <p>Is it for sale? {{forSale}}</p>
-        <p>Genre: {{genre}}</p>
-        <p>How many tracks? {{albumDetails.tracks}}</p>
-        <p>Release Year: {{albumDetails.releaseYear}}</p>
-        <p>RPM: {{albumDetails.rpm}}</p>
+    <div class="wrapper">
+        <div class="tab">
+
+            <input class="accordion" id="tab-one" type="checkbox" name="tabs">
+            <label class="acrdn-txt" for="tab-one">Update Entry +</label>
+            <div class="tab-content">
+                <form action="/vinylcollection/{{_id}}" method="POST">
+                    <label for="">Name</label><br>
+                    <input type="text" name="name" value={{name}} required><br>
+                    <label for="">Album Name</label><br>
+                    <input type="text" name="albumName" value={{albumName}} required><br>
+
+                    <label for="">Condition</label>
+                    <select type="select" name="condition" value={{condition}}required>
+                        <option value="new" selected>New</option>
+                        <option value="good">Good</option>
+                        <option value="fair">Fair</option>
+                        <option value="poor">Poor</option>
+                    </select>
+                    <br> {{#signed}}
+                    <p>Is it signed?</p>
+                    <label for="yesCheckbox">Yes</label>
+                    <input id="yesCheckbox" type="radio" name="signed" value="true" checked>
+                    <label for="noCheckbox">No</label>
+                    <input id="noCheckbox" type="radio" name="signed" value="false"> {{/signed}} {{^signed}}
+                    <label for="yesCheckbox">Yes</label>
+                    <input id="yesCheckbox" type="radio" name="signed" value="true">
+                    <label for="noCheckbox">No</label>
+                    <input id="noCheckbox" type="radio" name="signed" value="false" checked> {{/signed}}
+                    <br>
+                    <label for="">Number of Tracks</label><br>
+                    <input type="number" name="albumDetails.tracks" value={{albumDetails.tracks}}><br>
+                    <label for="">Release Year</label><br>
+                    <input type="number" name="albumDetails.releaseYear" value={{albumDetails.releaseYear}}><br>
+                    <label for="">RPM</label>
+                    <select type="select" name="albumDetails.rpm" value={{albumDetails.rpm}} required>
+                        <option value=33>33</option>
+                        <option value=45>45</option>
+                        <option value=78>78</option>
+                    </select>
+                    <br><br>
+                    <label for="">Genre:&nbsp;</label><br>{{#genre}}
+                    <input type="text" name="genre" value={{.}}>{{/genre}}<br>
+                    <p>Is it for sale?</p>
+                    {{#forSale}}
+                    <label for="">Yes</label>
+                    <input type="radio" name="forSale" value="true" checked>
+                    <label for="">No</label>
+                    <input type="radio" name="forSale" value="false"> {{/forSale}} {{^forSale}}
+                    <label for="">Yes</label>
+                    <input type="radio" name="forSale" value="true">
+                    <label for="">No</label>
+                    <input type="radio" name="forSale" value="false" checked> {{/forSale}}
+                    <br>
+                    <button type="Submit">Update</button>
+                </form>
+                <form action="/deleteAlbum/{{_id}}" method="GET">
+                    <button type="Submit">Delete</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="entry-styles">
+            <div>
+                <h1>{{name}}</h1>
+                <p>Artist Name: {{name}}</p>
+                <p>Album Name: {{albumName}}</p>
+                <p>Condition: {{condition}}</p>
+                <p>Is it signed? {{#signed}} Yes {{/signed}} {{^signed}} No {{/signed}}</p>
+                <p>Value: {{value}}</p>
+                <p>For sale? {{#forSale}} Yes {{/forSale}} {{^forSale}} No {{/forSale}}</p>
+                <p>Genre: {{genre}}</p>
+                <p>How many tracks? {{albumDetails.tracks}}</p>
+                <p>Release Year: {{albumDetails.releaseYear}}</p>
+                <p>RPM: {{albumDetails.rpm}}</p>
+            </div>
+            <a href="/">Return To Listings</a>
+            <br>
+        </div>
+
     </div>
-    <br>
-    </div>
+    {{/vinyl}}
 
- <form action="/vinylcollection/{{_id}}" method="POST">
-        <label for="">Name</label>
-        <input type="text" name="name" value={{name}} required><br>
-        <label for="">Album Name</label>
-        <input type="text" name="albumName" value={{albumName}} required><br>
-
-        <label for="">Condition</label>
-        <select type="select" name="condition" value={{condition}}required>
-            <option value="new" selected>New</option>
-            <option value="good">Good</option>
-            <option value="fair">Fair</option>
-            <option value="poor">Poor</option>
-         </select>
-        <br>
-
-        <h2>Is it signed?</h2>
-        {{#signed}}
-        <label for="yes">Yes</label>
-        <input type="radio" name="signed" checked >
-        <label for="no">No</label>
-        <input type="radio" name="signed">
-        {{/signed}}
-        {{^signed}}
-        <label for="yes">Yes</label>
-        <input type="radio" name="signed"  checked>
-        <label for="no">No</label>
-        <input type="radio" name="signed">
-       {{/signed}}
-
-        <label for="">Number of Tracks</label>
-        <input type="number" name="albumDetails.tracks" value={{albumDetails.tracks}} placeholder=""><br>
-        <label for="">Release Year</label>
-        <input type="number" name="albumDetails.releaseYear" value={{albumDetails.releaseYear}} placeholder=""><br>
-        <label for="">RPM</label>
-        <select type="select" name="albumDetails.rpm" value={{albumDetails.rpm}} required>
-            <option value=33 >33</option>
-            <option value=45 >45</option>
-            <option value=78 >78</option>
-         </select>
-        <label for="">Genre</label><br>{{#genre}}
-        <input type="text" name="genre" value={{.}}>{{/genre}}<br>
-    
-
-        <h2>Is it for sale?</h2>
-        {{#forSale}}
-        <label for="true">Yes</label>
-        <input type="radio" name="forSale" checked>
-        <label for="false">No</label>
-        <input type="radio" name="forSale">
-        {{/forSale}}
-        {{^forSale}}
-        <label for="true">Yes</label>
-        <input type="radio" name="forSale" checked>
-        <label for="false">No</label>
-        <input type="radio" name="forSale">
-        {{/forSale}}
-        <br>
-        <button type="Submit">Update</button>
-    </form>
-    {{/vinyl}} 
-
-<div class="bottom-nav">
-     <form action="/" method="DELETE">
-        <button type="Submit">Delete</button>
-     </form>
-     <a href="/">Return To Listings</a>
-</div>
-</div>
-   
 </body>
+
 </html>

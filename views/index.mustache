@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,81 +9,82 @@
     <link rel="stylesheet" href="/styles.css">
     <link href="https://fonts.googleapis.com/css?family=Raleway:300i,400,500,600" rel="stylesheet">
 </head>
+
 <body>
+    <div class="wrapper">
+        <div class="tab">
 
-<div class="wrapper">
-    <div class="new-entry">
-    <form action="/vinylcollection" method="POST">
-        <label for="">Name</label><br>
-        <input type="text" name="name" placeholder="Artist name" required><br><br>
-        <label for="">Album Name</label><br>
-        <input type="text" name="albumName" placeholder="Album name" required>
-        <br>
-        <label for="">Condition</label>
-        <select type="select" name="condition" required>
-            <option value="new" selected>New</option>
-            <option value="good">Good</option>
-            <option value="fair">Fair</option>
-            <option value="poor">Poor</option>
-         </select>
-        <br>
-        <p>Is it signed?</p>
-        <label for="yes">Yes</label>
-        <input type="radio" name="signed" value="Yes" checked>
-        <label for="no">No</label>
-        <input type="radio" name="signed" value="No">
-       <br>
+            <input class="accordion" id="tab-one" type="checkbox" name="tabs">
+            <label class="acrdn-txt" for="tab-one">Create a new entry +</label>
+            <div class="tab-content">
+                <form action="/vinylcollection" method="POST">
+                    <label for="">Name</label><br>
+                    <input type="text" name="name" placeholder="" required><br>
+                    <label for="">Album Name</label><br>
+                    <input type="text" name="albumName" placeholder="" required><br>
+                    <label for="">Conditon</label>
+                    <select type="select" name="condition" placeholder="" required>
+                            <option value="new" selected>New</option>
+                            <option value="good">Good</option>
+                            <option value="fair">Fair</option>
+                            <option value="poor">Poor</option>
+                     </select>
+                    <p>Is it signed?</p>
+                    <label for="yesCheckbox">Yes</label>
+                    <input id="yesCheckbox" type="radio" name="signed" value="true">
+                    <label for="noCheckbox">No</label>
+                    <input id="noCheckbox" type="radio" name="signed" value="false"><br>
+                    <label for="">Number of Tracks</label><br>
+                    <input type="number" name="albumDetails.tracks" placeholder=""><br>
+                    <label for="">Release Year</label><br>
+                    <input type="number" name="albumDetails.releaseYear" placeholder=""><br>
 
-        <label for="">Number of Tracks</label>
-        <input type="number" name="albumDetails.tracks" placeholder=""><br><br>
-        <label for="">Release Year</label>
-        <input type="number" name="albumDetails.releaseYear" placeholder=""><br><br>
+                    <label for="">RPM</label>
+                    <select type="select" name="albumDetails.rpm" required>
+                                <option value=33 >33</option>
+                                <option value=45 >45</option>
+                                <option value=78 >78</option>
+                                </select>
+                    <br><br>
+                    <label for="">Genre</label><br>
+                    <input type="text" name="genre" placeholder=""><br>
+                    <input type="text" name="genre" placeholder=""><br>
+                    <input type="text" name="genre" placeholder=""><br>
+                    <br>
+                    <label for="">Value</label><br>
+                    <input type="number" name="value"><br>
 
-        <label for="">RPM</label>
-        <select type="select" name="albumDetails.rpm" required>
-            <option value=33 >33</option>
-            <option value=45 >45</option>
-            <option value=78 >78</option>
-         </select>
-        <br><br>
-        <label for="">Genre</label><br>
-        <input type="text" name="genre" placeholder=""><br>
-        <input type="text" name="genre" placeholder=""><br>
-        <input type="text" name="genre" placeholder=""><br>
-        <br>
-        <label for="">Value</label><br>
-        <input type="number" name="value"><br>
-
-        <p>Is it for sale?</p>
-        <label for="true">Yes</label>
-        <input type="radio" name="forSale" value="true" required checked>
-        <label for="false">No</label>
-        <input type="radio" name="forSale" value="false">
-        <br><br>
-        <button type="Submit">Submit</button>
-    </form>
-</div>
+                    <p>Is it for sale?</p>
+                    <label for="true">Yes</label>
+                    <input type="radio" name="forSale" value="true" required>
+                    <label for="false">No</label>
+                    <input type="radio" name="forSale" value="false" required>
+                    <br>
+                    <button id="submit" type="Submit">Submit</button>
+                </form>
+            </div>
+        </div>
 
 
+        {{#vinyl}}
+        <div class="entry-styles">
+            <a href="/vinylcollection/{{_id}}">
+                <h1>{{name}}</h1>
+            </a>
+            <p>Artist Name: &nbsp; {{name}}</p>
+            <p>Album Name: &nbsp; {{albumName}}</p>
+            <p>Condition: &nbsp;{{condition}}</p>
+            <p>Is it signed? &nbsp; {{#signed}} Yes {{/signed}} {{^signed}} No {{/signed}}</p>
+            <p>Value: &nbsp;{{value}}</p>
+            <p>For sale? &nbsp; {{#forSale}} Yes {{/forSale}} {{^forSale}} No {{/forSale}}</p>
+            <p>Genre: {{#genre}}&nbsp; {{.}}&nbsp;{{/genre}}</p>
+            <p>How many tracks? &nbsp; {{albumDetails.tracks}}</p>
+            <p>Release Year: &nbsp; {{albumDetails.releaseYear}}</p>
+            <p>RPM: &nbsp; {{albumDetails.rpm}}</p>
+        </div>
+        <br> {{/vinyl}}
 
- {{#vinyl}}
-
-    <div class="entry-styles">
-        <a href="/vinylcollection/{{_id}}"><h1>{{name}}</h1></a>
-        <p>Artist Name: {{name}}</p>
-        <p>Album Name: {{albumName}}</p>
-        <p>Condition: {{condition}}</p>
-        <p>Is it signed? {{signed}}</p>
-        <p>Value: {{value}}</p>
-        <p>Is it for sale? {{forSale}}</p>
-        <p>Genre: {{genre}}</p>
-        <p>How many tracks? {{albumDetails.tracks}}</p>
-        <p>Release Year: {{albumDetails.releaseYear}}</p>
-        <p>RPM: {{albumDetails.rpm}}</p>
     </div>
-    <br>
-    {{/vinyl}}  
-
-</div>
 </body>
+
 </html>

@@ -3,8 +3,7 @@ body {
     width: 100vw;
     height: 100vh;
     font-family: 'Raleway', sans-serif;
-    /* background-image: url("https://www.toptal.com/designers/subtlepatterns/patterns/swirl_pattern.png"); */
-    background: linear-gradient( rgba(5, 39, 51, 0.45), rgba(5, 39, 51, 0.45)), url("https://www.toptal.com/designers/subtlepatterns/patterns/swirl_pattern.png");
+    background: linear-gradient( rgba(51, 18, 4, 0.45), rgba(5, 39, 51, 0.45)), url("https://www.toptal.com/designers/subtlepatterns/patterns/swirl_pattern.png");
     background-attachment: fixed;
 }
 
@@ -17,8 +16,15 @@ body {
 .new-entry {
     display: flex;
     justify-content: center;
+    color: #faf3ea;
     width: 100%;
     padding: 40px;
+    background: rgba(19, 35, 47, 0.9);
+    padding: 40px;
+    max-width: 100%;
+    margin: 0 0 40px 0;
+    border-radius: 4px;
+    box-shadow: 0 4px 10px 4px rgba(19, 35, 47, 0.3);
 }
 
 .entry-styles {
@@ -28,11 +34,7 @@ body {
     padding: 15px 0 53px 60px;
     border-radius: 8px;
     margin-bottom: 20px;
-    /* box-shadow: 1 1 4px rgba(25, 25, 25, 1); */
-}
-
-.details {
-    margin-top: 60px;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2), 0 3px 3px 0 rgba(0, 0, 0, 0.24);
 }
 
 a {
@@ -43,9 +45,93 @@ a {
 }
 
 a:hover {
-    color: rgb(117, 24, 83);
+    color: rgb(120, 59, 84);
 }
 
 .bottom-nav {
     margin-bottom: 30px;
+}
+
+
+/*accordion*/
+
+.tab {
+    position: relative;
+    margin-bottom: 41px;
+    width: 100%;
+    color: #fff;
+    overflow: hidden;
+    text-align: center;
+}
+
+.accordion {
+    position: absolute;
+    opacity: 0;
+    z-index: -1;
+}
+
+.acrdn-txt {
+    position: relative;
+    display: block;
+    padding: 0 0 0 1em;
+    background: #0D8194;
+    font-weight: bold;
+    line-height: 3.4;
+    cursor: pointer;
+    font-size: 1.2rem;
+}
+
+.tab-content {
+    max-height: 0;
+    overflow: hidden;
+    background: rgba(13, 129, 148, 0.51);
+    -webkit-transition: max-height .35s;
+    -o-transition: max-height .35s;
+    transition: max-height .35s;
+}
+
+.tab-content p {
+    margin: 1em;
+}
+
+.accordion:checked ~ .tab-content {
+    max-height: 50em;
+}
+
+input {
+    outline: 0;
+    background: #f2f2f2;
+    border: 0;
+    margin: 0 0 8px;
+    padding: 5px;
+}
+
+form {
+    margin: 20px 0;
+}
+
+button {
+    text-transform: uppercase;
+    outline: 0;
+    background: rgb(120, 59, 84);
+    border-radius: 5px;
+    border: 0;
+    padding: 9px 18px;
+    color: #FFFFFF;
+    font-size: 14px;
+    -webkit-transition: all 0.3 ease;
+    transition: all 0.3 ease;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+select {
+    outline: 0;
+    background: rgb(120, 59, 84);
+    border: 0;
+    color: #FFFFFF;
+    font-size: 14px;
+    -webkit-transition: all 0.3 ease;
+    transition: all 0.3 ease;
+    cursor: pointer;
 }
