@@ -19,12 +19,12 @@
             <div class="tab-content">
                 <form action="/vinylcollection/{{_id}}" method="POST">
                     <label for="">Name</label><br>
-                    <input type="text" name="name" value={{name}} required><br>
+                    <input type="text" name="name" value="{{name}}" required><br>
                     <label for="">Album Name</label><br>
-                    <input type="text" name="albumName" value={{albumName}} required><br>
+                    <input type="text" name="albumName" value="{{albumName}}" required><br>
 
                     <label for="">Condition</label>
-                    <select type="select" name="condition" value={{condition}}required>
+                    <select type="select" name="condition" value="{{condition}}" required>
                         <option value="new" selected>New</option>
                         <option value="good">Good</option>
                         <option value="fair">Fair</option>
@@ -46,7 +46,7 @@
                     <label for="">Release Year</label><br>
                     <input type="number" name="albumDetails.releaseYear" value={{albumDetails.releaseYear}}><br>
                     <label for="">RPM</label>
-                    <select type="select" name="albumDetails.rpm" value={{albumDetails.rpm}} required>
+                    <select type="select" name="albumDetails.rpm" value="{{albumDetails.rpm}}" required>
                         <option value=33>33</option>
                         <option value=45>45</option>
                         <option value=78>78</option>
